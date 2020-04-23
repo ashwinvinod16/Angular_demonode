@@ -3,7 +3,7 @@ const app = express();
 const bodyparser= require('body-parser');
 const cors= require('cors');
 const mongoClient=require("mongodb");
-const url="mongodb://localhost:27017";
+const url="mongodb+srv://Ashwin:Ashwin@16@cluster0-ghy7c.mongodb.net/test?retryWrites=true&w=majority";
 
 
 app.use(cors());
@@ -121,8 +121,25 @@ app.post('/cusers',function(req,res){
      })
    })
  })
+});
+
+app.post('/users',function(req,res){
+
+    //storing data in db
+   
+   mongoClient.connect(url,function(err,client){
+     if(err) throw err;
+     var db = client.db("abidasdb");
+     db.collection("product").insert(req.body,function(err,data){
+       if(err) throw err;
+       client.close();
+       res.json({
+         message:"saved"
+       })
+     })
+   })
   
- });
+});
 
 
 
