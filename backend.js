@@ -11,6 +11,8 @@ app.use(bodyparser.json());
 
 app.use(bodyparser.urlencoded({extended: true}));
 
+app.set('port',process.env.PORT)
+
 
 // ..........to get all product 
 app.get('/productlist', (req, res) => {
@@ -129,4 +131,4 @@ app.post('/cusers',function(req,res){
 
 
 
-app.listen(4040);
+app.listen(app.get('port'));
